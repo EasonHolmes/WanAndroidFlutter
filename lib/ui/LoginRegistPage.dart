@@ -13,16 +13,14 @@ class LoginRegistPage extends StatefulWidget {
 
 class _LoginRegistPageState
     extends BasePageState<LoginRegistViewModel, LoginRegistPage> {
-//定义一个controller
   final TextEditingController _unameController = TextEditingController();
   final TextEditingController _unpasswordController = TextEditingController();
   final ValueNotifier _loginText = ValueNotifier<String>("登录");
   bool _isLogin = true;
-
   @override
   void initState() {
     super.initState();
-
+    mViewModel.login("test11223", "test24545");
   }
 
   @override
@@ -79,7 +77,7 @@ class _LoginRegistPageState
           _loginText.value = _isLogin ? "登录" : "注册";
         },
         child: const Icon(Icons.change_circle),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 

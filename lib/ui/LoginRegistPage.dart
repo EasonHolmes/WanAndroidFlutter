@@ -3,7 +3,7 @@ import 'package:wanandroid_flutter/base/BasePageWidget.dart';
 import 'package:wanandroid_flutter/ui/Home.dart';
 import 'package:wanandroid_flutter/utils/RouteUtils.dart';
 import 'package:wanandroid_flutter/utils/Snack.dart';
-import '../viewmodel/LoginRegistViewModel.dart';
+import 'package:wanandroid_flutter/viewmodel/LoginRegistViewModel.dart';
 
 class LoginRegistPage extends StatefulWidget {
   const LoginRegistPage({super.key});

@@ -30,12 +30,38 @@ class HttpUtils {
     return ops;
   }
 
-  static void doPost(
-      String action, Map<String, dynamic> map, Function(Map<String, dynamic>  response) success,
-      [Function(String fail)? failed]) async {
+  static void doPost(String action, Map<String, dynamic> map,
+      Function(Map<String, dynamic> response) success,
+      {Function(String fail)? failed}) async {
     LogUtils.log("requestUrl==$action data==$map");
     await Dio(getHttpOptions())
         .post(action, data: FormData.fromMap(map))
+        .then((value) {
+      LogUtils.log("responseData==${value.data}");
+      var map = (value.data as Map<String, dynamic>);
+      var errorCode = map["errorCode"];
+      var errorMsg = map["errorMsg"];
+      if (errorCode != 0 && failed != null) {
+        failed(errorMsg);
+      } else {
+        success(value.data);
+      }
+    }).catchError((e) {
+      LogUtils.log("error==$e");
+      if (failed != null) {
+        failed(e.toString());
+      }
+    });
+  }
+
+  static void doGet(
+      String action, Function(Map<String, dynamic> response) success,
+      //[]中括号为可选参
+      {Map<String, Object>? queryParameters,
+      Function(String fail)? failed}) async {
+    LogUtils.log("requestUrl==$action data==$queryParameters");
+    await Dio(getHttpOptions())
+        .get(action, queryParameters: queryParameters)
         .then((value) {
       LogUtils.log("responseData==${value.data}");
       success(value.data);
@@ -45,12 +71,5 @@ class HttpUtils {
         failed(e.toString());
       }
     });
-  }
-
-  static Future<Response<String>> get(String action,
-      //[]中括号为可选参
-      [Map<String, Object>? queryParameters]) async {
-    print("requestUrl==$action data==$queryParameters");
-    return await Dio().get<String>(action, queryParameters: queryParameters);
   }
 }

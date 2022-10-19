@@ -1,6 +1,6 @@
 
-class RegistResponse {
-  RegistResponse({
+class RegistLoginResponse {
+  RegistLoginResponse({
     required this.data,
     required this.errorCode,
     required this.errorMsg,
@@ -9,7 +9,7 @@ class RegistResponse {
   late final int errorCode;
   late final String errorMsg;
 
-  RegistResponse.fromJson(Map<String, dynamic> json){
+  RegistLoginResponse.fromJson(Map<String, dynamic> json){
     data = Data.fromJson(json['data']);
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];

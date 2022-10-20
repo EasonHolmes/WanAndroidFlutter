@@ -18,24 +18,28 @@ class _SplashState extends BasePageState<SplashPageViewModel, SplashPage> {
   @override
   void initState() {
     super.initState();
-    mViewModel.isLogin((login) => {
-          if (login)
-            {RouteUtils.routePage(context, const HomePage(), finishMine: true)}
-          else
-            {
-              RouteUtils.routePage(context, const LoginRegistPage(),
-                  finishMine: true)
-            }
-        });
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold();
-  }
-
   @override
   SplashPageViewModel getViewModel() {
     return SplashPageViewModel();
+  }
+
+  @override
+  Widget builded(BuildContext context) {
+    mViewModel.isLogin((login) => {
+      if (login)
+        {RouteUtils.routePage(context, const HomePage(), finishMine: true)}
+      else
+        {
+          RouteUtils.routePage(context, const LoginRegistPage(),
+              finishMine: true)
+        }
+    });
+    return Scaffold();
+  }
+  @override
+  void dispose() {
+    super.dispose();
+
   }
 }

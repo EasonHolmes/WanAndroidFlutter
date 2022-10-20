@@ -25,7 +25,10 @@ class _HomePageState extends BasePageState<HomePageViewModel,HomePage>{
   int _currentIndex = 0;
 
   @override
-  Widget build(BuildContext context) {
+  HomePageViewModel getViewModel() => HomePageViewModel();
+
+  @override
+  Widget builded(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("主页"),
@@ -97,10 +100,8 @@ class _HomePageState extends BasePageState<HomePageViewModel,HomePage>{
         }).toList(),
       ),
     );
-  }
 
-  @override
-  HomePageViewModel getViewModel() => HomePageViewModel();
+  }
 
 }
 

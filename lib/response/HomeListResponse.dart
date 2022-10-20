@@ -24,26 +24,31 @@ class HomeListResponse {
 }
 
 class Data {
-  Data({
-    required this.curPage,
-    required this.datas,
-    required this.offset,
-    required this.over,
-    required this.pageCount,
-    required this.size,
-    required this.total,
-  });
-  late final int curPage;
-  late final List<Datas> datas;
-  late final int offset;
-  late final bool over;
-  late final int pageCount;
-  late final int size;
-  late final int total;
-  
-  Data.fromJson(Map<String, dynamic> json){
+  int? curPage;
+  List<Datas>? datas;
+  int? offset;
+  bool? over;
+  int? pageCount;
+  int? size;
+  int? total;
+
+  Data(
+      {this.curPage,
+        this.datas,
+        this.offset,
+        this.over,
+        this.pageCount,
+        this.size,
+        this.total});
+
+  Data.fromJson(Map<String, dynamic> json) {
     curPage = json['curPage'];
-    datas = List.from(json['datas']).map((e)=>Datas.fromJson(e)).toList();
+    if (json['datas'] != null) {
+      datas = <Datas>[];
+      json['datas'].forEach((v) {
+        datas!.add(new Datas.fromJson(v));
+      });
+    }
     offset = json['offset'];
     over = json['over'];
     pageCount = json['pageCount'];
@@ -52,93 +57,95 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['curPage'] = curPage;
-    _data['datas'] = datas.map((e)=>e.toJson()).toList();
-    _data['offset'] = offset;
-    _data['over'] = over;
-    _data['pageCount'] = pageCount;
-    _data['size'] = size;
-    _data['total'] = total;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['curPage'] = this.curPage;
+    if (this.datas != null) {
+      data['datas'] = this.datas!.map((v) => v.toJson()).toList();
+    }
+    data['offset'] = this.offset;
+    data['over'] = this.over;
+    data['pageCount'] = this.pageCount;
+    data['size'] = this.size;
+    data['total'] = this.total;
+    return data;
   }
 }
 
 class Datas {
-  Datas({
-    required this.adminAdd,
-    required this.apkLink,
-    required this.audit,
-    required this.author,
-    required this.canEdit,
-    required this.chapterId,
-    required this.chapterName,
-    required this.collect,
-    required this.courseId,
-    required this.desc,
-    required this.descMd,
-    required this.envelopePic,
-    required this.fresh,
-    required this.host,
-    required this.id,
-    required this.isAdminAdd,
-    required this.link,
-    required this.niceDate,
-    required this.niceShareDate,
-    required this.origin,
-    required this.prefix,
-    required this.projectLink,
-    required this.publishTime,
-    required this.realSuperChapterId,
-    required this.selfVisible,
-    required this.shareDate,
-    required this.shareUser,
-    required this.superChapterId,
-    required this.superChapterName,
-    required this.tags,
-    required this.title,
-    required this.type,
-    required this.userId,
-    required this.visible,
-    required this.zan,
-  });
-  late final bool adminAdd;
-  late final String apkLink;
-  late final int audit;
-  late final String author;
-  late final bool canEdit;
-  late final int chapterId;
-  late final String chapterName;
-  late final bool collect;
-  late final int courseId;
-  late final String desc;
-  late final String descMd;
-  late final String envelopePic;
-  late final bool fresh;
-  late final String host;
-  late final int id;
-  late final bool isAdminAdd;
-  late final String link;
-  late final String niceDate;
-  late final String niceShareDate;
-  late final String origin;
-  late final String prefix;
-  late final String projectLink;
-  late final int publishTime;
-  late final int realSuperChapterId;
-  late final int selfVisible;
-  late final int shareDate;
-  late final String shareUser;
-  late final int superChapterId;
-  late final String superChapterName;
-  late final List<Tags> tags;
-  late final String title;
-  late final int type;
-  late final int userId;
-  late final int visible;
-  late final int zan;
-  
-  Datas.fromJson(Map<String, dynamic> json){
+  bool? adminAdd;
+  String? apkLink;
+  int? audit;
+  String? author;
+  bool? canEdit;
+  int? chapterId;
+  String? chapterName;
+  bool? collect;
+  int? courseId;
+  String? desc;
+  String? descMd;
+  String? envelopePic;
+  bool? fresh;
+  String? host;
+  int? id;
+  bool? isAdminAdd;
+  String? link;
+  String? niceDate;
+  String? niceShareDate;
+  String? origin;
+  String? prefix;
+  String? projectLink;
+  int? publishTime;
+  int? realSuperChapterId;
+  int? selfVisible;
+  int? shareDate;
+  String? shareUser;
+  int? superChapterId;
+  String? superChapterName;
+  List<Tags>? tags;
+  String? title;
+  int? type;
+  int? userId;
+  int? visible;
+  int? zan;
+
+  Datas(
+      {this.adminAdd,
+        this.apkLink,
+        this.audit,
+        this.author,
+        this.canEdit,
+        this.chapterId,
+        this.chapterName,
+        this.collect,
+        this.courseId,
+        this.desc,
+        this.descMd,
+        this.envelopePic,
+        this.fresh,
+        this.host,
+        this.id,
+        this.isAdminAdd,
+        this.link,
+        this.niceDate,
+        this.niceShareDate,
+        this.origin,
+        this.prefix,
+        this.projectLink,
+        this.publishTime,
+        this.realSuperChapterId,
+        this.selfVisible,
+        this.shareDate,
+        this.shareUser,
+        this.superChapterId,
+        this.superChapterName,
+        this.tags,
+        this.title,
+        this.type,
+        this.userId,
+        this.visible,
+        this.zan});
+
+  Datas.fromJson(Map<String, dynamic> json) {
     adminAdd = json['adminAdd'];
     apkLink = json['apkLink'];
     audit = json['audit'];
@@ -168,7 +175,12 @@ class Datas {
     shareUser = json['shareUser'];
     superChapterId = json['superChapterId'];
     superChapterName = json['superChapterName'];
-    tags = List.from(json['tags']).map((e)=>Tags.fromJson(e)).toList();
+    if (json['tags'] != null) {
+      tags = <Tags>[];
+      json['tags'].forEach((v) {
+        tags!.add(new Tags.fromJson(v));
+      });
+    }
     title = json['title'];
     type = json['type'];
     userId = json['userId'];
@@ -177,63 +189,63 @@ class Datas {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['adminAdd'] = adminAdd;
-    _data['apkLink'] = apkLink;
-    _data['audit'] = audit;
-    _data['author'] = author;
-    _data['canEdit'] = canEdit;
-    _data['chapterId'] = chapterId;
-    _data['chapterName'] = chapterName;
-    _data['collect'] = collect;
-    _data['courseId'] = courseId;
-    _data['desc'] = desc;
-    _data['descMd'] = descMd;
-    _data['envelopePic'] = envelopePic;
-    _data['fresh'] = fresh;
-    _data['host'] = host;
-    _data['id'] = id;
-    _data['isAdminAdd'] = isAdminAdd;
-    _data['link'] = link;
-    _data['niceDate'] = niceDate;
-    _data['niceShareDate'] = niceShareDate;
-    _data['origin'] = origin;
-    _data['prefix'] = prefix;
-    _data['projectLink'] = projectLink;
-    _data['publishTime'] = publishTime;
-    _data['realSuperChapterId'] = realSuperChapterId;
-    _data['selfVisible'] = selfVisible;
-    _data['shareDate'] = shareDate;
-    _data['shareUser'] = shareUser;
-    _data['superChapterId'] = superChapterId;
-    _data['superChapterName'] = superChapterName;
-    _data['tags'] = tags.map((e)=>e.toJson()).toList();
-    _data['title'] = title;
-    _data['type'] = type;
-    _data['userId'] = userId;
-    _data['visible'] = visible;
-    _data['zan'] = zan;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['adminAdd'] = this.adminAdd;
+    data['apkLink'] = this.apkLink;
+    data['audit'] = this.audit;
+    data['author'] = this.author;
+    data['canEdit'] = this.canEdit;
+    data['chapterId'] = this.chapterId;
+    data['chapterName'] = this.chapterName;
+    data['collect'] = this.collect;
+    data['courseId'] = this.courseId;
+    data['desc'] = this.desc;
+    data['descMd'] = this.descMd;
+    data['envelopePic'] = this.envelopePic;
+    data['fresh'] = this.fresh;
+    data['host'] = this.host;
+    data['id'] = this.id;
+    data['isAdminAdd'] = this.isAdminAdd;
+    data['link'] = this.link;
+    data['niceDate'] = this.niceDate;
+    data['niceShareDate'] = this.niceShareDate;
+    data['origin'] = this.origin;
+    data['prefix'] = this.prefix;
+    data['projectLink'] = this.projectLink;
+    data['publishTime'] = this.publishTime;
+    data['realSuperChapterId'] = this.realSuperChapterId;
+    data['selfVisible'] = this.selfVisible;
+    data['shareDate'] = this.shareDate;
+    data['shareUser'] = this.shareUser;
+    data['superChapterId'] = this.superChapterId;
+    data['superChapterName'] = this.superChapterName;
+    if (this.tags != null) {
+      data['tags'] = this.tags!.map((v) => v.toJson()).toList();
+    }
+    data['title'] = this.title;
+    data['type'] = this.type;
+    data['userId'] = this.userId;
+    data['visible'] = this.visible;
+    data['zan'] = this.zan;
+    return data;
   }
 }
 
 class Tags {
-  Tags({
-    required this.name,
-    required this.url,
-  });
-  late final String name;
-  late final String url;
-  
-  Tags.fromJson(Map<String, dynamic> json){
+  String? name;
+  String? url;
+
+  Tags({this.name, this.url});
+
+  Tags.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     url = json['url'];
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['name'] = name;
-    _data['url'] = url;
-    return _data;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['name'] = this.name;
+    data['url'] = this.url;
+    return data;
   }
 }

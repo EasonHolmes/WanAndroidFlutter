@@ -22,7 +22,7 @@ class LogUtils {
 }
 
 class HttpUtils {
-  static getHttpOptions() {
+  static _getHttpOptions() {
     var ops = BaseOptions();
     ops.baseUrl = Contast.BASE_URL;
     // ops.contentType = 'application/json; charset=utf-8';
@@ -34,7 +34,7 @@ class HttpUtils {
       Function(Map<String, dynamic> response) success,
       {Function(String fail)? failed}) async {
     LogUtils.log("requestUrl==$action data==$map");
-    await Dio(getHttpOptions())
+    await Dio(_getHttpOptions())
         .post(action, data: FormData.fromMap(map))
         .then((value) {
       LogUtils.log("responseData==${value.data}");
@@ -60,7 +60,7 @@ class HttpUtils {
       {Map<String, Object>? queryParameters,
       Function(String fail)? failed}) async {
     LogUtils.log("requestUrl==$action data==$queryParameters");
-    await Dio(getHttpOptions())
+    await Dio(_getHttpOptions())
         .get(action, queryParameters: queryParameters)
         .then((value) {
       LogUtils.log("responseData==${value.data}");

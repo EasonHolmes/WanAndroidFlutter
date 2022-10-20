@@ -4,12 +4,12 @@ class HomeListResponse {
     required this.errorCode,
     required this.errorMsg,
   });
-  late final Data data;
+  late final HomeListPData data;
   late final int errorCode;
   late final String errorMsg;
   
   HomeListResponse.fromJson(Map<String, dynamic> json){
-    data = Data.fromJson(json['data']);
+    data = HomeListPData.fromJson(json['data']);
     errorCode = json['errorCode'];
     errorMsg = json['errorMsg'];
   }
@@ -23,16 +23,16 @@ class HomeListResponse {
   }
 }
 
-class Data {
+class HomeListPData {
   int? curPage;
-  List<Datas>? datas;
+  List<HomeListData>? datas;
   int? offset;
   bool? over;
   int? pageCount;
   int? size;
   int? total;
 
-  Data(
+  HomeListPData(
       {this.curPage,
         this.datas,
         this.offset,
@@ -41,12 +41,12 @@ class Data {
         this.size,
         this.total});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  HomeListPData.fromJson(Map<String, dynamic> json) {
     curPage = json['curPage'];
     if (json['datas'] != null) {
-      datas = <Datas>[];
+      datas = <HomeListData>[];
       json['datas'].forEach((v) {
-        datas!.add(new Datas.fromJson(v));
+        datas!.add(new HomeListData.fromJson(v));
       });
     }
     offset = json['offset'];
@@ -71,7 +71,7 @@ class Data {
   }
 }
 
-class Datas {
+class HomeListData {
   bool? adminAdd;
   String? apkLink;
   int? audit;
@@ -108,7 +108,7 @@ class Datas {
   int? visible;
   int? zan;
 
-  Datas(
+  HomeListData(
       {this.adminAdd,
         this.apkLink,
         this.audit,
@@ -145,7 +145,7 @@ class Datas {
         this.visible,
         this.zan});
 
-  Datas.fromJson(Map<String, dynamic> json) {
+  HomeListData.fromJson(Map<String, dynamic> json) {
     adminAdd = json['adminAdd'];
     apkLink = json['apkLink'];
     audit = json['audit'];

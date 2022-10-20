@@ -6,4 +6,5 @@ class Contast{
    static const String LOGIN= "/user/login";
    static const String REGISTER= "/user/register";
    static const String BANNER_JSON= "/banner/json";
+   static const String HOME_LIST = "/article/list/";
 }

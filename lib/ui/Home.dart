@@ -65,13 +65,6 @@ class _HomePageState extends BasePageState<HomePageViewModel, HomePage>
       appBar: AppBar(
         title: Text(_packageInfo.appName),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   child: const Icon(Icons.add),
-      //   onPressed: () {
-      //     ScaffoldMessenger.of(context)
-      //         .showSnackBar(const SnackBar(content: Text("content")));
-      //   },
-      // ),
       body: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),

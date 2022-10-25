@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterx_live_data/flutterx_live_data.dart';
@@ -8,7 +6,6 @@ import 'package:wanandroid_flutter/base/BasePageWidget.dart';
 import 'package:wanandroid_flutter/response/BannerResponse.dart';
 import 'package:wanandroid_flutter/response/HomeListResponse.dart';
 import 'package:wanandroid_flutter/ui/WebViewPage.dart';
-import 'package:wanandroid_flutter/utils/HttpUtils.dart';
 import 'package:wanandroid_flutter/utils/RouteUtils.dart';
 import 'package:wanandroid_flutter/viewmodel/TabPageMainViewModel.dart';
 import 'package:wanandroid_flutter/widget/CustomWidget.dart';
@@ -118,7 +115,6 @@ class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain> with
         margin: const EdgeInsets.only(left: 18, right: 18, top: 15, bottom: 0),
         child: CustomInkWell(
             onPressed: () {
-              LogUtils.log("routePage to WebViewPage");
               RouteUtils.routePage(
                   context,
                   WebViewPage(

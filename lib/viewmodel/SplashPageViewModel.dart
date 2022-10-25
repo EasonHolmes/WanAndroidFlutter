@@ -9,11 +9,4 @@ class SplashPageViewModel extends BaseViewModel{
     var name = prefes.getString(Contast.USER_NAME);
     logined(name != null && name.isNotEmpty);
   }
-  loginIn(){
-    print("loginIn");
-  }
-  regist(){
-    print("regist");
-
-  }
 }

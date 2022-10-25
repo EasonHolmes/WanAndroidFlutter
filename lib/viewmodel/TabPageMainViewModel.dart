@@ -7,8 +7,8 @@ import 'package:wanandroid_flutter/response/HomeListResponse.dart';
 import 'package:wanandroid_flutter/utils/HttpUtils.dart';
 
 class TabPageMainViewModel extends BaseViewModel {
-  final MutableLiveData banner_liveData = MutableLiveData();
-  final MutableLiveData listData_liveData = MutableLiveData();
+  final MutableLiveData banner_liveData = MutableLiveData.late();
+  final MutableLiveData listData_liveData = MutableLiveData.late();
   void getBannerData() {
     HttpUtils.doGet(
         Contast.BANNER_JSON,

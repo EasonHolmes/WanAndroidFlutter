@@ -14,9 +14,9 @@ import 'package:wanandroid_flutter/cache/Contast.dart';
 // }
 
 class LogUtils {
-  static void log(String content) {
+  static void log(String content,{String tag = "ethan"}) {
     if (kDebugMode) {
-      print(content);
+      print("$tag====$content");
     }
   }
 }

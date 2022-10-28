@@ -79,7 +79,7 @@ class HomeListData {
   bool? canEdit;
   int? chapterId;
   String? chapterName;
-  bool? collect;
+  bool collect = false;
   int? courseId;
   String? desc;
   String? descMd;
@@ -116,7 +116,7 @@ class HomeListData {
         this.canEdit,
         this.chapterId,
         this.chapterName,
-        this.collect,
+        this.collect =false,
         this.courseId,
         this.desc,
         this.descMd,

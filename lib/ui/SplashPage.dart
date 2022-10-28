@@ -19,6 +19,7 @@ class _SplashState extends BasePageState<SplashPageViewModel, SplashPage> {
   void initState() {
     super.initState();
   }
+
   @override
   SplashPageViewModel getViewModel() {
     return SplashPageViewModel();
@@ -26,9 +27,12 @@ class _SplashState extends BasePageState<SplashPageViewModel, SplashPage> {
 
   @override
   Widget builded(BuildContext context) {
-    mViewModel.isLogin((login) => {
+    mViewModel.isLogin((login) =>
+    {
       if (login)
-        {RouteUtils.routePage(context, const HomePage(), finishMine: true)}
+        mViewModel.refreshUserData(() {
+          RouteUtils.routePage(context, const HomePage(), finishMine: true);
+        })
       else
         {
           RouteUtils.routePage(context, const LoginRegistPage(),
@@ -37,9 +41,9 @@ class _SplashState extends BasePageState<SplashPageViewModel, SplashPage> {
     });
     return Scaffold();
   }
+
   @override
   void dispose() {
     super.dispose();
-
   }
 }

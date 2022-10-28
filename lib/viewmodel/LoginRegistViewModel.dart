@@ -16,16 +16,22 @@ class LoginRegistViewModel extends BaseViewModel {
         Contast.LOGIN, {"username": userName, "password": password},
         (response) {
       var registResponse = RegistLoginResponse.fromJson(response);
-      saveUser(registResponse.data.publicName);
+
+
+
+      saveUser(userName,password);
+
+
       callback(true, "");
     }, failed: (fail) {
       callback(false, fail);
     });
   }
 
-  void saveUser(String userName) async {
+  void saveUser(String userName,String password) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.setString(Contast.USER_NAME, userName);
+    sp.setString(Contast.PASSWORD, password);
   }
 
   void regist(String userName, String password, String repassword,
@@ -43,7 +49,7 @@ class LoginRegistViewModel extends BaseViewModel {
       "password": password,
       "repassword": repassword
     }, (response) {
-      saveUser(RegistLoginResponse.fromJson(response).data.publicName);
+      // saveUser(RegistLoginResponse.fromJson(response).data.publicName);
       callback(true, "");
     }, failed: (fail) {
       callback(false, fail);

@@ -6,10 +6,14 @@ class Contast{
    static String packageName = "";
    static String buildNumber = "";
 
+   static String cookie="";
+   static String COOKIE_KEY="Cookie";
+   static String EXPIRES_KEY="expires";
 
    static const String BASE_URL = "https://www.wanandroid.com";
    static const String LOGIN= "/user/login";
    static const String REGISTER= "/user/register";
    static const String BANNER_JSON= "/banner/json";
    static const String HOME_LIST = "/article/list/";
+   static const String COLLECT = "/lg/collect/";
 }

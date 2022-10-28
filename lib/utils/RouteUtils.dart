@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:wanandroid_flutter/utils/HttpUtils.dart';
 
 class RouteUtils {
   static void routePage(BuildContext context, StatefulWidget widget,
-      {bool finishMine = false}) async {
+      {bool finishMine = false, Function(dynamic res)? res}) async {
     //导航到新路由
     // var result = await Navigator.push(
     //   context,
@@ -20,5 +21,9 @@ class RouteUtils {
         return widget;
       }),
     );
+    LogUtils.log("result=="+result);
+    if (res != null) {
+      res(result);
+    }
   }
 }

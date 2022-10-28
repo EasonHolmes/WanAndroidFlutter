@@ -11,6 +11,8 @@ class SingleLineFittedBox extends StatelessWidget {
     return LayoutBuilder(
       builder: (_, constraints) {
         return FittedBox(
+          // fit: BoxFit.contain,// 适配方式
+          // alignment: Alignment.centerLeft,
           //空间适配 自动缩放
           child: ConstrainedBox(
             constraints: constraints.copyWith(

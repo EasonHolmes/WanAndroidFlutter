@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wanandroid_flutter/cache/Contast.dart';
+import 'package:wanandroid_flutter/utils/DateUtil.dart';
 
 // class DioSingleton {
 //   late Dio dio;
@@ -14,7 +17,7 @@ import 'package:wanandroid_flutter/cache/Contast.dart';
 // }
 
 class LogUtils {
-  static void log(String content,{String tag = "ethan"}) {
+  static void log(String content, {String tag = "ethan"}) {
     if (kDebugMode) {
       print("$tag====$content");
     }
@@ -27,6 +30,19 @@ class HttpUtils {
     ops.baseUrl = Contast.BASE_URL;
     // ops.contentType = 'application/json; charset=utf-8';
     // ops.method = 'POST';
+    // var sp  = await SharedPreferences.getInstance();
+    // var userName = sp.getString(Contast.USER_NAME);
+    // var userPassword = sp.getString(Contast.PASSWORD);
+    // if(userName!=null && userName.isNotEmpty && userPassword!=null && userPassword.isNotEmpty){
+    //   var map = Map();
+    //   map.addEntries(MapEntry("loginUserName="+userName, value))
+    //   ops.headers =
+    // }
+    if (Contast.cookie.isNotEmpty) {
+      var map = <String, dynamic>{};
+      map["Cookie"] = Contast.cookie;
+      ops.headers = map;
+    }
     return ops;
   }
 
@@ -41,6 +57,9 @@ class HttpUtils {
       var map = (value.data as Map<String, dynamic>);
       var errorCode = map["errorCode"];
       var errorMsg = map["errorMsg"];
+      if (action.contains("login") || action.contains("register")) {
+        _saveCookie(value);
+      }
       if (errorCode != 0 && failed != null) {
         failed(errorMsg);
       } else {
@@ -52,6 +71,30 @@ class HttpUtils {
         failed(e.toString());
       }
     });
+  }
+
+  static void _saveCookie(Response response) async {
+    var expires;
+    var cookie;
+    response.headers.forEach((String name, List<String> values) {
+      if (name == "set-cookie") {
+        cookie = json
+            .encode(values)
+            .replaceAll("\[\"", "")
+            .replaceAll("\"\]", "")
+            .replaceAll("\",\"", "; ");
+        try {
+           expires = DateUtil.formatExpiresTime(cookie);
+        } catch (e) {
+           expires = DateTime.now();
+        }
+      }
+    });
+    LogUtils.log("setCookie==" + cookie);
+    var sp = await SharedPreferences.getInstance();
+    sp.setString(Contast.COOKIE_KEY, cookie);
+    sp.setString(Contast.EXPIRES_KEY, expires.toIso8601String());
+    Contast.cookie = cookie;
   }
 
   static void doGet(

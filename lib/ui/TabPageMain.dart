@@ -6,6 +6,7 @@ import 'package:wanandroid_flutter/base/BasePageWidget.dart';
 import 'package:wanandroid_flutter/response/BannerResponse.dart';
 import 'package:wanandroid_flutter/response/HomeListResponse.dart';
 import 'package:wanandroid_flutter/ui/WebViewPage.dart';
+import 'package:wanandroid_flutter/utils/HttpUtils.dart';
 import 'package:wanandroid_flutter/utils/RouteUtils.dart';
 import 'package:wanandroid_flutter/viewmodel/TabPageMainViewModel.dart';
 import 'package:wanandroid_flutter/widget/CustomWidget.dart';
@@ -20,10 +21,10 @@ class TabPageMain extends BasePage {
   }
 }
 
-class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain> with AutomaticKeepAliveClientMixin{
+class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true; // ** and here
-
 
   final List<HomeListData> _listData = [];
   var pageSize = 0;
@@ -66,6 +67,7 @@ class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain> with
   TabPageMainViewModel getViewModel() {
     return TabPageMainViewModel();
   }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -118,8 +120,15 @@ class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain> with
               RouteUtils.routePage(
                   context,
                   WebViewPage(
-                      url: _listData[index].link.toString(),
-                      title: _listData[index].title.toString()));
+                    url: _listData[index].link.toString(),
+                    title: _listData[index].title.toString(),
+                    isCollect: _listData[index].collect,
+                    id: _listData[index].id.toString(),
+                  ),res: (result){
+                    if(result!=null && result){
+                        _listData[index].collect = true;
+                    }
+              });
             },
             radius: 20,
             child: Column(

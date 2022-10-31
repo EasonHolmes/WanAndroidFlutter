@@ -30,7 +30,7 @@ class _LoginRegistPageState
               (loginOk, errorMsg) {
             if (loginOk) {
               SnackUtils.show(context, "登录成功");
-              RouteUtils.routePage(context, const HomePage(),finishMine: true);
+              Navigator.pop(context);
             } else {
               SnackUtils.show(context, errorMsg);
             }
@@ -43,7 +43,7 @@ class _LoginRegistPageState
               (registOk, errorMsg) {
             if (registOk) {
               SnackUtils.show(context, "注册成功");
-              RouteUtils.routePage(context, const HomePage(),finishMine: true);
+              Navigator.pop(context);
             } else {
               SnackUtils.show(context, errorMsg);
             }

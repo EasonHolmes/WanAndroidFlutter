@@ -28,7 +28,7 @@ class HttpUtils {
   static _getHttpOptions() {
     var ops = BaseOptions();
     ops.baseUrl = Contast.BASE_URL;
-    // ops.contentType = 'application/json; charset=utf-8';
+    ops.contentType = 'application/json; charset=utf-8';
     // ops.method = 'POST';
     // var sp  = await SharedPreferences.getInstance();
     // var userName = sp.getString(Contast.USER_NAME);

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutterx_live_data/flutterx_live_data.dart';
 import 'package:wanandroid_flutter/assets_common/Assets.dart';
 import 'package:wanandroid_flutter/base/BasePageWidget.dart';
+import 'package:wanandroid_flutter/cache/Contast.dart';
 import 'package:wanandroid_flutter/response/BannerResponse.dart';
 import 'package:wanandroid_flutter/response/HomeListResponse.dart';
+import 'package:wanandroid_flutter/ui/LoginRegistPage.dart';
 import 'package:wanandroid_flutter/ui/WebViewPage.dart';
 import 'package:wanandroid_flutter/utils/HttpUtils.dart';
 import 'package:wanandroid_flutter/utils/RouteUtils.dart';
@@ -124,42 +126,63 @@ class _TabPageMain extends BasePageState<TabPageMainViewModel, TabPageMain>
                     title: _listData[index].title.toString(),
                     isCollect: _listData[index].collect,
                     id: _listData[index].id.toString(),
-                  ),res: (result){
-                    if(result!=null && result){
-                        _listData[index].collect = true;
-                    }
+                  ), res: (result) {
+                if (result != null && result) {
+                  _listData[index].collect = true;
+                }
               });
             },
             radius: 20,
             child: Column(
               children: [
+                Container(
+                    margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset(
+                            "${ImagePaths.root}/main_user_icon.png",
+                            width: 25,
+                            height: 25,
+                          ),
+                          Expanded(child: Text(user!)),
+                          Container(
+                              margin: const EdgeInsets.only(right: 20),
+                              child: CustomInkWell(
+                                  onPressed: () {
+                                    Contast.isLogin((login) {
+                                      if (login) {
+                                        mViewModel.collect(
+                                            _listData[index].id.toString(),
+                                            (collected) {
+                                          if (collected) {
+                                            _listData[index].collect = true;
+                                            setState(() {});
+                                          }
+                                        });
+                                      }else{
+                                        RouteUtils.routePage(context, const LoginRegistPage());
+                                      }
+                                    });
+                                  },
+                                  child: Image.asset(
+                                    "${ImagePaths.root}/collect_icon.png",
+                                    width: 25,
+                                    height: 25,
+                                    color: _listData[index].collect
+                                        ? Colors.redAccent
+                                        : Colors.grey,
+                                  )))
+                        ])),
                 Row(children: [
-                  Container(
-                      margin:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: Image.asset(
-                        "${ImagePaths.root}/main_title_icon.png",
-                        width: 50,
-                        height: 50,
-                      )),
                   Expanded(
                       child: Container(
-                          margin: const EdgeInsets.only(right: 10),
+                          margin: const EdgeInsets.only(left: 15, top: 20,right: 30),
                           child: Text(_listData[index].title.toString())))
                 ]),
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                      margin:
-                          const EdgeInsets.only(left: 10, right: 10, top: 10),
-                      child: Image.asset(
-                        "${ImagePaths.root}/main_user_icon.png",
-                        width: 40,
-                        height: 40,
-                      )),
-                  Expanded(child: Text("作者：${user!}"))
-                ]),
                 Container(
-                    margin: const EdgeInsets.only(right: 20, bottom: 10),
+                    margin:
+                        const EdgeInsets.only(right: 20, bottom: 10, top: 15),
                     alignment: Alignment.bottomRight,
                     child: Text(_listData[index].niceDate.toString()))
               ],

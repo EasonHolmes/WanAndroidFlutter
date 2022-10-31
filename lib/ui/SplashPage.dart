@@ -27,17 +27,8 @@ class _SplashState extends BasePageState<SplashPageViewModel, SplashPage> {
 
   @override
   Widget builded(BuildContext context) {
-    mViewModel.isLogin((login) =>
-    {
-      if (login)
-        mViewModel.refreshUserData(() {
-          RouteUtils.routePage(context, const HomePage(), finishMine: true);
-        })
-      else
-        {
-          RouteUtils.routePage(context, const LoginRegistPage(),
-              finishMine: true)
-        }
+    mViewModel.refreshUserData(() {
+      RouteUtils.routePage(context, const HomePage(), finishMine: true);
     });
     return Scaffold();
   }

@@ -55,26 +55,26 @@ class _WebViewPageState
           child:
               Text(widget.title, maxLines: 1, overflow: TextOverflow.ellipsis),
         ),
-        Container(
-          margin: const EdgeInsets.only(left: 15, right: 15),
-          child: CustomInkWell(
-            radius: 360,
-            onPressed: () {
-              mViewModel.collect(widget.id, (success) {
-                if (success) {
-                  collect =true;
-                  SnackUtils.show(context, "收藏成功");
-                }
-              });
-            },
-            child: Image.asset(
-              "${ImagePaths.root}/collect_icon.png",
-              width: 30,
-              height: 30,
-              color: widget.isCollect ? Colors.redAccent : Colors.grey,
-            ),
-          ),
-        )
+        // Container(
+        //   margin: const EdgeInsets.only(left: 15, right: 15),
+        //   child: CustomInkWell(
+        //     radius: 360,
+        //     onPressed: () {
+        //       mViewModel.collect(widget.id, (success) {
+        //         if (success) {
+        //           collect =true;
+        //           SnackUtils.show(context, "收藏成功");
+        //         }
+        //       });
+        //     },
+        //     child: Image.asset(
+        //       "${ImagePaths.root}/collect_icon.png",
+        //       width: 30,
+        //       height: 30,
+        //       color: widget.isCollect ? Colors.redAccent : Colors.grey,
+        //     ),
+        //   ),
+        // )
       ])),
       body: Stack(
         children: [

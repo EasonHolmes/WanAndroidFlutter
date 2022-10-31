@@ -21,8 +21,8 @@ class RouteUtils {
         return widget;
       }),
     );
-    LogUtils.log("result=="+result);
     if (res != null) {
+      LogUtils.log("result=="+result);
       res(result);
     }
   }

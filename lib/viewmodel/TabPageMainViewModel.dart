@@ -23,4 +23,11 @@ class TabPageMainViewModel extends BaseViewModel {
     var response = await HttpUtils.doFutureGet("${Contast.HOME_LIST}$pageSize/json");
     return Future.value(HomeListResponse.fromJson(response.data).data);
   }
+  void collect(String id, Function(bool collected) callback) {
+    HttpUtils.doGet("${Contast.COLLECT}$id/json", (response) {
+      callback(true);
+    }, failed: (fail) {
+      callback(false);
+    });
+  }
 }
